@@ -3,41 +3,85 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class InventoryPageUI : MonoBehaviour
 {
-    [SerializeField] List<ItemSO> ItemSOs;
+    [SerializeField] InventorySO InventorySO;
     [SerializeField] GameObject ItemPrefab;
     [SerializeField] RectTransform contentPanel;
-    [SerializeField] InventoryManager InventoryManager;
-    [SerializeField] InventoryItemUI InventoryItemUI;
-    public Dictionary<int,InventoryItemUI> itemDict = new Dictionary<int, InventoryItemUI>();
+    [SerializeField] InventoryManager inventoryManager;
+    [SerializeField] DescriptionUI descriptionUI;
+    [SerializeField] MouseFollower mouseFollower;
+    [SerializeField] public List<InventoryItemUI> inventoryItems;
+    private InventoryItemUI prevSelectedItem; 
+    public Action<int,int> OnItemSwap;
 
     public void Initalize() {
-        for(int i = 0; i < InventoryManager.size; i++) {
-            if(ItemSOs[i] != null) {
-                GameObject item = Instantiate(ItemPrefab,contentPanel);
-                InventoryItemUI inventoryItem = item.GetComponent<InventoryItemUI>();
-                itemDict[i] = InventoryManager.inventoryItems[i];
-                InventoryManager.inventoryItems.Add(inventoryItem);
+        for(int i = 0; i < inventoryManager.size; i++) {
+            GameObject item = Instantiate(ItemPrefab,contentPanel);
+            InventoryItemUI inventoryItem = item.GetComponent<InventoryItemUI>();
+            inventoryItems.Add(inventoryItem);
 
                 inventoryItem.OnItemPointerClick += HandlePointerClick;
+                inventoryItem.OnItemBeginDrag += HandleBeginDrag;
+                inventoryItem.OnItemEndDrag += HandleEndDrag;
+                inventoryItem.OnItemDrag += HandleDrag;
+                inventoryItem.OnItemDrop += HandleDrop;
 
-                inventoryItem.SetItemImage(ItemSOs[i].sprite);
-                inventoryItem.SetQuantity(ItemSOs[i].quantity);
-
+            if(InventorySO.InventoryItems[i].isEmpty == false) {
+            
+                inventoryItem.SetItem(InventorySO.InventoryItems[i]);
             }
             else{
-                GameObject item = Instantiate(ItemPrefab,contentPanel);
-                item.GetComponent<InventoryItemUI>().isEmpty = true;
+                inventoryItem.ResetItem();
             }
         }
     }
 
     public void HandlePointerClick(InventoryItemUI item) {
-        Debug.Log(item.descriptionName);
+        ResetBorders();
+        if(!item.isEmpty) {
+            if(prevSelectedItem == item){
+                ResetBorders();
+                prevSelectedItem = null;
+                return;
+            }
+            descriptionUI.SetDescription(item);
+            item.itemBorder.SetActive(true);
+            prevSelectedItem = item;
+        }
+        else{
+            descriptionUI.ResetDescription();  
+        }
     }
 
+    public void HandleBeginDrag(InventoryItemUI item) {
+        prevSelectedItem = item;
+        mouseFollower.SetFollow(item);
+    }
+
+    public void HandleEndDrag(InventoryItemUI item) {
+        mouseFollower.EndFollow(item);
+    }
+
+    public void HandleDrag(InventoryItemUI item) {
+    }
+
+    public void HandleDrop(InventoryItemUI item) {
+        int index1 = inventoryItems.IndexOf(prevSelectedItem);
+        int index2 = inventoryItems.IndexOf(item);
+        if(index1 == -1 || index2 == -1) {
+            return;
+        }       
+        OnItemSwap?.Invoke(index1,index2);
+    }
+
+    public void ResetBorders() {
+        foreach (InventoryItemUI item in inventoryItems) {
+            item.itemBorder.SetActive(false);
+        }
+    }
 }

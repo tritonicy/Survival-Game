@@ -413,9 +413,18 @@ MonoBehaviour:
   ItemSOs:
   - {fileID: 11400000, guid: 24c9336b9a563654ab84bcddfed6721a, type: 2}
   - {fileID: 11400000, guid: 50272bf19e88672419595f9e1729aba7, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   ItemPrefab: {fileID: 7584551099883181990, guid: 34f88fd9d03bd0343964b388ea6446fe, type: 3}
   contentPanel: {fileID: 6958359124887102899}
   InventoryManager: {fileID: 0}
+  descriptionUI: {fileID: 1920195483}
 --- !u!1 &6958359124155505154
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,7 +809,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6958359123989179757}
   m_HandleRect: {fileID: 6958359123989179756}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 1.0000126
   m_Size: 0.82266665
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -840,7 +849,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.0006790161}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6958359124887102896
@@ -977,7 +986,7 @@ GameObject:
   - component: {fileID: 6958359125112422771}
   - component: {fileID: 6958359125112422770}
   - component: {fileID: 6958359125112422768}
-  - component: {fileID: 5587003371459396138}
+  - component: {fileID: 1920195483}
   m_Layer: 5
   m_Name: DescriptionPanel
   m_TagString: Untagged
@@ -1071,7 +1080,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &5587003371459396138
+--- !u!114 &1920195483
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1083,9 +1092,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0caae633024e3742af59498259f96c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  descriptionText: {fileID: 0}
-  descriptionName: {fileID: 0}
-  descriptionImage: {fileID: 0}
+  descriptionText: {fileID: 6958359125451361950}
+  descriptionName: {fileID: 6958359124289115080}
+  descriptionImage: {fileID: 6958359123807896717}
 --- !u!1 &6958359125120369135
 GameObject:
   m_ObjectHideFlags: 0

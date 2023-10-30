@@ -4,13 +4,24 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    [SerializeField] private InventoryPageUI InventoryPageUI;
+    [SerializeField] private InventoryPageUI inventoryPageUI;
+    [HideInInspector] private DescriptionUI descriptionUI;
+    [SerializeField] public InventorySO inventorySO;
     [SerializeField] private Canvas InventoryCanvas;
     [SerializeField] public int size = 10;
-    [HideInInspector] public List<InventoryItemUI> inventoryItems = new List<InventoryItemUI>();
+    public List<InventoryItem> initialItems = new List<InventoryItem>();
 
     private void Start() {
-        InventoryPageUI.Initalize();
+
+
+        descriptionUI = FindObjectOfType<DescriptionUI>();
+
+        inventorySO.Initalize();
+        InitalizeInventory();
+        inventoryPageUI.Initalize();
+        
+        inventoryPageUI.OnItemSwap += HandleSwap;
+
     }
     private void Update() {
         if(Input.GetKeyDown(KeyCode.I)) {
@@ -19,6 +30,28 @@ public class InventoryManager : MonoBehaviour
             }
             else
             InventoryCanvas.enabled = true;
+        }
+    }
+
+    public void HandleSwap(int index1, int index2) {
+        inventorySO.SwapItems(index1,index2);
+        InformUI();
+    }
+
+    public void InitalizeInventory() {
+        foreach(InventoryItem item in initialItems) {
+            inventorySO.AddItem(item);
+        }
+    }
+    private void InformUI() {
+        ResetInfo();
+        for(int i = 0; i< size; i++) {
+            inventoryPageUI.inventoryItems[i].SetItem(inventorySO.InventoryItems[i]);
+        }
+    }
+    public void ResetInfo() {
+        for(int i = 0; i< size; i++) {
+            inventoryPageUI.inventoryItems[i].ResetItem();
         }
     }
 }

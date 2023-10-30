@@ -244,12 +244,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7730409a715130942bb40a1cdd64d975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  descriptionText: {fileID: 0}
-  descriptionName: {fileID: 0}
-  descriptionImage: {fileID: 0}
+  descriptionText: 
+  descriptionName: 
   quantity: {fileID: 7074281600236477404}
   itemImage: {fileID: 7584551099853170310}
-  itemBorderImage: {fileID: 1460385316351829712}
+  itemBorder: {fileID: 1697140392278391480}
   isEmpty: 0
 --- !u!1 &8096170931840880828
 GameObject:

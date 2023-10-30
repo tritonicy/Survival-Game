@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7967e985ec3f9a4caf46f0c267e1af1, type: 3}
   m_Name: item1
   m_EditorClassIdentifier: 
-  <sprite>k__BackingField: {fileID: 21300000, guid: d1371205877538447ad2ea473179746d, type: 3}
+  <sprite>k__BackingField: {fileID: 21300000, guid: 0a0b70cfd52e574419e377163923b946, type: 3}
   <quantity>k__BackingField: 10
   <itemName>k__BackingField: Tower
-  <description>k__BackingField: Tower
+  <description>k__BackingField: Tower1

@@ -6,56 +6,88 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class InventoryItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler, IPointerClickHandler
+public class InventoryItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler, IPointerClickHandler, IDropHandler
 {
     [Header("Description")]
-    [HideInInspector] public TextMeshProUGUI descriptionText;
-    [HideInInspector] public TextMeshProUGUI descriptionName;
-    [HideInInspector] public Image descriptionImage;
+    [HideInInspector] public string descriptionText;
+    [HideInInspector] public string descriptionName;
 
     [Header("Item") ]
-    [SerializeField] private TextMeshProUGUI quantity;
-    [SerializeField] private Image itemImage;
-    [SerializeField] private Image itemBorderImage;
-    public bool isEmpty = false;
+    [SerializeField] public TextMeshProUGUI quantity;
+    [SerializeField] public Image itemImage;
+    [SerializeField] public GameObject itemBorder;
+    [SerializeField] public bool isEmpty;
 
-    public Action<InventoryItemUI> OnItemPointerClick, OnItemBeginDrag, OnItemDrag, OnItemEndDrag;
+    public Action<InventoryItemUI> OnItemPointerClick, OnItemBeginDrag, OnItemDrag, OnItemEndDrag, OnItemDrop;
 
-    private void Start() {
-    }
-    public void SetItemImage(Sprite image) {
-        this.itemImage.sprite = image;
+    public void SetItemImage(Sprite sprite) {
+        this.itemImage.sprite = sprite;
     }
 
     public void SetQuantity(int quantity) {
         this.quantity.text = quantity.ToString();
     }
 
-    public void SetDescription(string description, string name, Image image) {
-        descriptionText.text = description;
-        descriptionName.text = name;
-        descriptionImage = image;
-    } 
+    public void SetItemDescription(string name, string description) {
+        descriptionName = name;
+        descriptionText = description;
+
+    }
+    public void SetItem(InventoryItem item) {
+        SetItemImage(item.item.sprite);
+        SetQuantity(item.item.quantity);
+        SetItemDescription(item.item.itemName,item.item.description);
+        isEmpty = false;
+    }
 
     public void OnDrag(PointerEventData eventData)
     {
-        throw new NotImplementedException();
+        if(isEmpty)
+            return;
+
+        OnItemDrag?.Invoke(this);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        throw new NotImplementedException();
+        if(isEmpty)
+            return;
+        
+        OnItemEndDrag?.Invoke(this);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        throw new NotImplementedException();
+        if(isEmpty) {
+            return;
+        }
+        OnItemBeginDrag?.Invoke(this);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if(eventData.button == PointerEventData.InputButton.Left) {
-            OnItemPointerClick.Invoke(this);
+            OnItemPointerClick?.Invoke(this);
         }
+    }
+    public void OnDrop(PointerEventData eventData)
+    {
+        OnItemDrop?.Invoke(this);
+    }
+
+    public void ResetItem() {
+        descriptionName = "";
+        descriptionText = "";
+        quantity.text = "";
+        itemImage.sprite = null;
+        isEmpty = true;
+    }
+
+    public void SetItem(string descriptionName, string descriptionText, TextMeshProUGUI quantity, Image image) {
+        this.descriptionName = descriptionName;
+        this.descriptionText = descriptionText;
+        this.quantity.text = quantity.text;
+        this.itemImage.sprite = image.sprite;
+        isEmpty = false;
     }
 }
