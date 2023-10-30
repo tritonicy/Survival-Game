@@ -30,7 +30,7 @@ public class MouseFollower : MonoBehaviour
         image.color = tempcolor;
     }
 
-    public void EndFollow(InventoryItemUI item) {
+    public void EndFollow() {
         SetAlpha(FollowImage,0f);
         this.gameObject.SetActive(false);
     }

@@ -283,7 +283,6 @@ GameObject:
   - component: {fileID: 6958359124139945720}
   - component: {fileID: 6958359124139945723}
   - component: {fileID: 6958359124139945722}
-  - component: {fileID: 6958359124139945725}
   - component: {fileID: 6958359124139945721}
   m_Layer: 5
   m_Name: InventoryPanel
@@ -378,26 +377,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &6958359124139945725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6958359124139945727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: 757.19995
-  m_PreferredHeight: 246.79999
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!114 &6958359124139945721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,21 +389,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61da8e0234d62f74fb192a8ff89d9a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemSOs:
-  - {fileID: 11400000, guid: 24c9336b9a563654ab84bcddfed6721a, type: 2}
-  - {fileID: 11400000, guid: 50272bf19e88672419595f9e1729aba7, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  InventorySO: {fileID: 0}
   ItemPrefab: {fileID: 7584551099883181990, guid: 34f88fd9d03bd0343964b388ea6446fe, type: 3}
   contentPanel: {fileID: 6958359124887102899}
-  InventoryManager: {fileID: 0}
+  inventoryManager: {fileID: 0}
   descriptionUI: {fileID: 1920195483}
+  mouseFollower: {fileID: 0}
+  inventoryItems: []
 --- !u!1 &6958359124155505154
 GameObject:
   m_ObjectHideFlags: 0

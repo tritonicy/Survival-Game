@@ -20,7 +20,8 @@ public class InventoryPageUI : MonoBehaviour
     public Action<int,int> OnItemSwap;
 
     public void Initalize() {
-        for(int i = 0; i < inventoryManager.size; i++) {
+        inventoryItems = new List<InventoryItemUI>();
+        for(int i = 0; i < InventorySO.size; i++) {
             GameObject item = Instantiate(ItemPrefab,contentPanel);
             InventoryItemUI inventoryItem = item.GetComponent<InventoryItemUI>();
             inventoryItems.Add(inventoryItem);
@@ -64,7 +65,8 @@ public class InventoryPageUI : MonoBehaviour
     }
 
     public void HandleEndDrag(InventoryItemUI item) {
-        mouseFollower.EndFollow(item);
+        Debug.Log(item.descriptionName);
+        mouseFollower.EndFollow();
     }
 
     public void HandleDrag(InventoryItemUI item) {
@@ -75,7 +77,8 @@ public class InventoryPageUI : MonoBehaviour
         int index2 = inventoryItems.IndexOf(item);
         if(index1 == -1 || index2 == -1) {
             return;
-        }       
+        }
+        ResetBorders();       
         OnItemSwap?.Invoke(index1,index2);
     }
 

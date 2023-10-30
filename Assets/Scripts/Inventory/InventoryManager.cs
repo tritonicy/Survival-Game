@@ -8,7 +8,6 @@ public class InventoryManager : MonoBehaviour
     [HideInInspector] private DescriptionUI descriptionUI;
     [SerializeField] public InventorySO inventorySO;
     [SerializeField] private Canvas InventoryCanvas;
-    [SerializeField] public int size = 10;
     public List<InventoryItem> initialItems = new List<InventoryItem>();
 
     private void Start() {
@@ -45,12 +44,15 @@ public class InventoryManager : MonoBehaviour
     }
     private void InformUI() {
         ResetInfo();
-        for(int i = 0; i< size; i++) {
-            inventoryPageUI.inventoryItems[i].SetItem(inventorySO.InventoryItems[i]);
+        for(int i = 0; i< inventorySO.size; i++) {
+            if(inventorySO.InventoryItems[i].isEmpty == false) {
+                inventoryPageUI.inventoryItems[i].SetItem(inventorySO.InventoryItems[i]);
+            }
         }
+
     }
     public void ResetInfo() {
-        for(int i = 0; i< size; i++) {
+        for(int i = 0; i< inventorySO.size; i++) {
             inventoryPageUI.inventoryItems[i].ResetItem();
         }
     }

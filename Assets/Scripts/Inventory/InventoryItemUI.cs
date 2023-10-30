@@ -50,9 +50,6 @@ public class InventoryItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBe
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if(isEmpty)
-            return;
-        
         OnItemEndDrag?.Invoke(this);
     }
 
