@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.Events;
@@ -12,12 +13,13 @@ public class InventoryPageUI : MonoBehaviour
     [SerializeField] InventorySO InventorySO;
     [SerializeField] GameObject ItemPrefab;
     [SerializeField] RectTransform contentPanel;
-    [SerializeField] InventoryManager inventoryManager;
     [SerializeField] DescriptionUI descriptionUI;
     [SerializeField] MouseFollower mouseFollower;
     [SerializeField] public List<InventoryItemUI> inventoryItems;
     private InventoryItemUI prevSelectedItem; 
     public Action<int,int> OnItemSwap;
+    public Action<int> OnSelected;
+    public Action OnResetSelected;
 
     public void Initalize() {
         inventoryItems = new List<InventoryItemUI>();
@@ -43,15 +45,19 @@ public class InventoryPageUI : MonoBehaviour
     }
 
     public void HandlePointerClick(InventoryItemUI item) {
+        OnResetSelected?.Invoke();
         ResetBorders();
         if(!item.isEmpty) {
             if(prevSelectedItem == item){
                 ResetBorders();
+                OnResetSelected?.Invoke();
+                descriptionUI.ResetDescription();
                 prevSelectedItem = null;
                 return;
             }
             descriptionUI.SetDescription(item);
             item.itemBorder.SetActive(true);
+            OnSelected?.Invoke(inventoryItems.IndexOf(item));
             prevSelectedItem = item;
         }
         else{

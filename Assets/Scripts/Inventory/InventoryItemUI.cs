@@ -17,6 +17,8 @@ public class InventoryItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBe
     [SerializeField] public Image itemImage;
     [SerializeField] public GameObject itemBorder;
     [SerializeField] public bool isEmpty;
+    [SerializeField] public ItemType itemType;
+    public bool isSelected{get;set;}
 
     public Action<InventoryItemUI> OnItemPointerClick, OnItemBeginDrag, OnItemDrag, OnItemEndDrag, OnItemDrop;
 
@@ -33,10 +35,14 @@ public class InventoryItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBe
         descriptionText = description;
 
     }
+    public void SetItemType(ItemType itemType) {
+        this.itemType = itemType;
+    } 
     public void SetItem(InventoryItem item) {
         SetItemImage(item.item.sprite);
-        SetQuantity(item.item.quantity);
+        SetQuantity(item.quantity);
         SetItemDescription(item.item.itemName,item.item.description);
+        SetItemType(item.item.itemType);
         isEmpty = false;
     }
 

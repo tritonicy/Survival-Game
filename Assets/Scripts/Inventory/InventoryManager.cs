@@ -20,6 +20,8 @@ public class InventoryManager : MonoBehaviour
         inventoryPageUI.Initalize();
         
         inventoryPageUI.OnItemSwap += HandleSwap;
+        inventoryPageUI.OnSelected += HandleSeleciton;
+        inventoryPageUI.OnResetSelected += HandleResetSelection;
 
     }
     private void Update() {
@@ -42,18 +44,23 @@ public class InventoryManager : MonoBehaviour
             inventorySO.AddItem(item);
         }
     }
-    private void InformUI() {
+    public void InformUI() {
         ResetInfo();
         for(int i = 0; i< inventorySO.size; i++) {
             if(inventorySO.InventoryItems[i].isEmpty == false) {
                 inventoryPageUI.inventoryItems[i].SetItem(inventorySO.InventoryItems[i]);
             }
         }
-
     }
     public void ResetInfo() {
         for(int i = 0; i< inventorySO.size; i++) {
             inventoryPageUI.inventoryItems[i].ResetItem();
         }
+    }
+    public void HandleSeleciton(int index) {
+        inventorySO.SetSelectedItem(index);
+    }
+    public void HandleResetSelection() {
+        inventorySO.ResetSelectionItem();
     }
 }

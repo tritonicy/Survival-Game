@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6647519174511344964}
   - component: {fileID: 6647519174511344965}
   - component: {fileID: 6647519174511344962}
-  - component: {fileID: 6647519174511344966}
   - component: {fileID: 6647519174511344969}
   m_Layer: 0
   m_Name: Player
@@ -85,7 +84,7 @@ SpriteRenderer:
   m_Size: {x: 0.5, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &6647519174511344965
@@ -122,37 +121,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
---- !u!60 &6647519174511344966
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6647519174511344963}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.5}
-    newSize: {x: 0.5, y: 0.5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.00056648254, y: -0.08094746}
-      - {x: -0.1516839, y: -0.040118277}
-      - {x: -0.1559762, y: -0.11907774}
-      - {x: 0.0010839403, y: -0.2207289}
-      - {x: 0.14503239, y: -0.12533796}
-      - {x: 0.1439136, y: -0.04747571}
 --- !u!114 &6647519174511344969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,10 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fa64ccba0e5cf64d9acd53fe0a2161a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryPageUI: {fileID: 0}
-  descriptionUI: {fileID: 0}
+  inventoryPageUI: {fileID: 0}
+  inventorySO: {fileID: 0}
   InventoryCanvas: {fileID: 0}
-  size: 10
-  inventoryItems:
-  - {fileID: 7715004057273132726, guid: 34f88fd9d03bd0343964b388ea6446fe, type: 3}
-  - {fileID: 7715004057273132726, guid: b561a6fc17ac0874a8e4b87992f07d57, type: 3}
+  initialItems: []
